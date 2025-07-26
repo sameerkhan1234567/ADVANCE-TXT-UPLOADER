@@ -38,15 +38,24 @@ from pytube import YouTube
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram.errors import FloodWait
-from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
+from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid, WebpageMediaEmpty
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
 cookies_file_path = os.getenv("COOKIES_FILE_PATH", "youtube_cookies.txt")
 
-#pwimg = "https://graph.org/file/8add8d382169e326f67e0-3bf38f92e52955e977.jpg"
-#ytimg = "https://graph.org/file/3aa806c302ceec62e6264-60ced740281395f68f.jpg"
-cpimg = "https://graph.org/file/5ed50675df0faf833efef-e102210eb72c1d5a17.jpg"  
+# Updated valid image URLs
+image_urls = [
+    "https://telegra.ph/file/996d4fc24564509244988.jpg",
+    "https://telegra.ph/file/96d25730136a3ea7e48de.jpg",
+    "https://telegra.ph/file/6593f76ddd8c735ae3ce2.jpg",
+    # Add more valid Telegraph image URLs
+]
 
+# Default fallback image
+FALLBACK_IMAGE = "https://telegra.ph/file/996d4fc24564509244988.jpg"
+
+cpimg = "https://telegra.ph/file/5ed50675df0faf833efef.jpg"  
 
 async def show_random_emojis(message):
     emojis = ['🎊', '🔮', '😎', '⚡️', '🚀', '✨', '💥', '🎉', '🥂', '🍾', '🦠', '🤖', '❤️‍🔥', '🕊️', '💃', '🥳','🐅','🦁']
