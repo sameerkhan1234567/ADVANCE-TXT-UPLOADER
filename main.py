@@ -681,13 +681,13 @@ async def upload(bot: Client, m: Message):
                 cmd = f'yt-dlp -f "{ytf}" "{url}" -o "{name}.mp4"'
 
             try:  
-                cc = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mkv\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}\n\n**━━━━━━━✦✗✦━━━━━━━**'
-                #cpw = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}**'
-                cyt = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mp4\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}**'
-                cpvod = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\n\nTitle : {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}**'
-                cimg = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.jpg\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}\n\n**━━━━━━━✦✗✦━━━━━━━**'
-                cczip = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.zip\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}\n\n**━━━━━━━✦✗✦━━━━━━━**'
-                cc1 = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.pdf\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}\n\n**━━━━━━━✦✗✦━━━━━━━**'
+                cc = f'**➭ Index » {str(count).zfill(3)}.\n\n➭ Title » {name1}.({res}).mkv\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}\n**━━━━━━━✦✗✦━━━━━━━**'
+                #cpw = f'**➭ Index » {str(count).zfill(3)}.\n\n➭ Title » {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}**'
+                cyt = f'**➭ Index » {str(count).zfill(3)}.\n\n➭ Title » {name1}.({res}).mp4\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}**'
+                cpvod = f'**➭ Index » {str(count).zfill(3)}.\n\n\n➭ Title » {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}**'
+                cimg = f'**➭ Index » {str(count).zfill(3)}.\n\n➭ Title » {name1}.jpg\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}\n**━━━━━━━✦✗✦━━━━━━━**'
+                cczip = f'**➭ Index » {str(count).zfill(3)}.\n\n➭ Title » {name1}.zip\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}\n**━━━━━━━✦✗✦━━━━━━━**'
+                cc1 = f'**➭ Index » {str(count).zfill(3)}.\n\n➭ Title » {name1}.pdf\n\n➭ 𝐁𝐚𝐭𝐜𝐡 » {b_name}\n\n✨ 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐄𝐃 𝐁𝐘 {CR}\n**━━━━━━━✦✗✦━━━━━━━**'
           
                 if "drive" in url:
                     try:
