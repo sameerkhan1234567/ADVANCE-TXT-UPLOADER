@@ -135,7 +135,7 @@ keyboard = InlineKeyboardMarkup(
 
 # Image URLs for the random image feature
 image_urls = [    
-    "https://files.catbox.moe/k3qs5r.jpg",
+    "http://ibb.co/tpJ8w36c",
     # Add more image URLs as needed
 ]
 
