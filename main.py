@@ -7,7 +7,7 @@ import sys
 import json
 import time
 import m3u8
-import aiohttp
+import aiohttp # Added for robust image download
 import asyncio
 import requests
 import subprocess
@@ -34,6 +34,7 @@ from aiohttp import ClientSession
 from pyromod import listen
 from subprocess import getstatusoutput
 from pytube import YouTube
+import tempfile # Added for temporary file handling
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -57,7 +58,7 @@ async def show_random_emojis(message):
     return emoji_message
 
 # Define the owner's user ID
-OWNER_ID = 1368753935 # Replace with the actual owner's user ID
+OWNER_ID = 6697868446 # Replace with the actual owner's user ID
 
 # Initialize the database instance globally
 # This will attempt to connect to MongoDB when the bot starts
@@ -133,29 +134,11 @@ keyboard = InlineKeyboardMarkup(
       )
 
 # Image URLs for the random image feature
-image_urls = [
-    "https://graph.org/file/996d4fc24564509244988-a7d93d020c96973ba8.jpg",
-    "https://graph.org/file/96d25730136a3ea7e48de-b0a87a529feb485c8f.jpg",
-    "https://graph.org/file/6593f76ddd8c735ae3ce2-ede9fa2df40079b8a0.jpg",
-    "https://graph.org/file/a5dcdc33020aa7a488590-79e02b5a397172cc35.jpg",
-    "https://graph.org/file/0346106a432049e391181-7560294e8652f9d49d.jpg",
-    "https://graph.org/file/ba49ebe9a8e387addbcdc-be34c4cd4432616699.jpg",
-    "https://graph.org/file/26f98dec8b3966687051f-557a430bf36b660e24.jpg",
-    "https://graph.org/file/2ae78907fa4bbf3160ffa-2d69cd23fa75cb0c3a.jpg",
-    "https://graph.org/file/05ef9478729f165809dd7-3df2f053d2842ed098.jpg",
-    "https://graph.org/file/b1330861fed21c4d7275c-0f95cca72c531382c1.jpg",
-    "https://graph.org/file/0ebb95807047b062e402a-9e670a0821d74e3306.jpg",
-    "https://graph.org/file/b4e5cfd4932d154ad6178-7559c5266426c0a399.jpg",
-    "https://graph.org/file/44ffab363c1a2647989bc-00e22c1e36a9fd4156.jpg",
-    "https://graph.org/file/5f0980969b54bb13f2a8a-a3e131c00c81c19582.jpg",
-    "https://graph.org/file/6341c0aa94c803f94cdb5-225b2999a89ff87e39.jpg",
-    "https://graph.org/file/90c9f79ec52e08e5a3025-f9b73e9d17f3da5040.jpg",
-    "https://graph.org/file/1aaf27a49b6bd81692064-30016c0a382f9ae22b.jpg",
-    "https://graph.org/file/702aa31236364e4ebb2be-3f88759834a4b164a0.jpg",
-    "https://graph.org/file/d0c6b9f6566a564cd7456-27fb594d26761d3dc0.jpg",
+image_urls = [    
+    "https://files.catbox.moe/k3qs5r.jpg",
     # Add more image URLs as needed
 ]
-random_image_url = random.choice(image_urls)
+
 # Caption for the image
 caption = (
         "**ʜᴇʟʟᴏ👋**\n\n"
@@ -167,7 +150,51 @@ caption = (
 # Start command handler
 @bot.on_message(filters.command(["start"]))
 async def start_command(bot: Client, message: Message):
-    await bot.send_photo(chat_id=message.chat.id, photo=random_image_url, caption=caption, reply_markup=keyboard)
+    selected_image_url = random.choice(image_urls)
+    image_path = None
+    try:
+        # Use tempfile to create a temporary file for the image
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_image_file:
+            image_path = temp_image_file.name
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(selected_image_url) as resp:
+                if resp.status == 200:
+                    with open(image_path, 'wb') as f:
+                        f.write(await resp.read())
+                    # Send the downloaded photo
+                    await bot.send_photo(
+                        chat_id=message.chat.id,
+                        photo=image_path, # Send the local file path
+                        caption=caption,
+                        reply_markup=keyboard
+                    )
+                else:
+                    logging.error(f"Failed to download image from {selected_image_url}: Status {resp.status}")
+                    # Fallback: send a text message or a default image if download fails
+                    await message.reply_text(
+                        "**ʜᴇʟʟᴏ👋**\n\n"
+                        "➠ **ɪ ᴀᴍ ᴛxᴛ ᴛᴏ ᴠɪᴅᴇᴏ ᴜᴘʟᴏᴀᴅᴇʀ ʙᴏᴛ.**\n"
+                        "➠ **ғᴏʀ ᴜsᴇ ᴍᴇ sᴇɴᴅ /txt.\n"
+                        "➠ **ғᴏʀ ɢᴜɪᴅᴇ sᴇɴᴅ /help.\n\n"
+                        "*(Image could not be loaded)*",
+                        reply_markup=keyboard
+                    )
+    except Exception as e:
+        logging.error(f"Error sending start photo: {e}")
+        # Fallback: send a text message if any error occurs during image handling
+        await message.reply_text(
+            "**ʜᴇʟʟᴏ👋**\n\n"
+            "➠ **ɪ ᴀᴍ ᴛxᴛ ᴛᴏ ᴠɪᴅᴇᴏ ᴜᴘʟᴏᴀᴅᴇʀ ʙᴏᴛ.**\n"
+            "➠ **ғᴏʀ ᴜsᴇ ᴍᴇ sᴇɴᴅ /txt.\n"
+            "➠ **ғᴏʀ ɢᴜɪᴅᴇ sᴇ𝗻𝗱 /help.\n\n"
+            "*(Image could not be loaded)*",
+            reply_markup=keyboard
+        )
+    finally:
+        # Clean up the temporary file
+        if image_path and os.path.exists(image_path):
+            os.remove(image_path)
 
 # Stop command handler
 @bot.on_message(filters.command("stop"))
@@ -184,7 +211,7 @@ async def restart_handler(_, m):
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-COOKIES_FILE_PATH = "youtube_cookies.txt"
+COOKIES_FILE_PATH = os.getenv("COOKIES_FILE_PATH", "youtube_cookies.txt")
 
 @bot.on_message(filters.command("cookies") & filters.private)
 async def cookies_handler(client: Client, m: Message):
@@ -229,7 +256,6 @@ async def cookies_handler(client: Client, m: Message):
 
 # Define paths for uploaded file and processed file
 # Using tempfile for better handling of temporary files
-import tempfile
 
 @bot.on_message(filters.command('e2t'))
 async def edit_txt(client, message: Message):
@@ -321,9 +347,6 @@ async def edit_txt(client, message: Message):
             await message.reply_text(f"🚨 **Error**: Unable to send the file.\n\nDetails: {e}")
         finally:
             pass # tempdir handles cleanup
-
-from pytube import Playlist
-import youtube_dl
 
 # --- Configuration ---
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -682,11 +705,11 @@ async def upload(bot: Client, m: Message):
 
             try:
                 cc = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mkv\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀᴄᴛᴇᴅ Bʏ : {CR}**'
-                #cpw = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
-                cyt = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mp4\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
-                cpvod = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\n\nTitle : {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲ᴏ 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
-                cimg = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.jpg\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
-                cczip = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.zip\n\n📚 Bᴀᴛᴄʜ Nᴀᴍᴇ : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
+                #cpw = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍ𝗲 : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
+                cyt = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.({res}).mp4\n\n\n🔗𝗩𝗶𝗱𝗲𝗼 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍ𝗲 : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
+                cpvod = f'**🎬 Vɪᴅ Iᴅ : {str(count).zfill(3)}.\n\n\nTitle : {name1}.({res}).mkv\n\n\n🔗𝗩𝗶𝗱𝗲ᴏ 𝗨𝗿𝗹 ➤ <a href="{url}">__Click Here to Watch Video__</a>\n\n📚 Bᴀᴛᴄʜ Nᴀᴍ𝗲 : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
+                cimg = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.jpg\n\n📚 Bᴀᴛᴄʜ Nᴀᴍ𝗲 : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
+                cczip = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.zip\n\n📚 Bᴀᴛᴄʜ Nᴀᴍ𝗲 : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
                 cc1 = f'**📕 Pᴅꜰ Iᴅ : {str(count).zfill(3)}.\n\nTitle : {name1}.pdf\n\n📚 Bᴀᴛᴄʜ Nᴀᴍ𝗲 : {b_name}\n\n📇 Exᴛʀᴀ𝗰𝘁𝗲𝗱 Bʏ : {CR}**'
 
                 if "drive" in url:
@@ -828,7 +851,7 @@ async def upload(bot: Client, m: Message):
                 else:
                     emoji_message = await show_random_emojis(message)
                     remaining_links = len(links) - count
-                    Show = f"**🍁 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗜𝗡𝗚 🍁**\n\n**📝ɴᴀᴍᴇ » ** `{name}\n\n🔗ᴛᴏᴛᴀʟ ᴜʀʟ » {len(links)}\n\n🗂️ɪɴᴅᴇ𝘅 » {str(count)}/{len(links)}\n\n🌐ʀᴇᴍᴀɪɴɪɴɢ ᴜʀʟ » {remaining_links}\n\n❄ǫᴜᴀʟɪᴛʏ » {res}`\n\n**🔗ᴜʀʟ » ** `{url}`\n\n𝗕𝗢𝗧 𝗠𝗔𝗗𝗘 𝗕𝗬 ➤ 𝗔𝗗𝗜𝗧𝗬𝗔⚡️\n\n"
+                    Show = f"**🍁 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗜𝗡𝗚 🍁**\n\n**📝ɴᴀᴍᴇ » ** `{name}\n\n🔗ᴛᴏᴛᴀʟ ᴜʀʟ » {len(links)}\n\n🗂️ɪɴᴅᴇ𝘅 » {str(count)}/{len(links)}\n\n🌐ʀᴇᴍᴀ𝗶𝗻𝗶𝗻𝗴 ᴜʀʟ » {remaining_links}\n\n❄ǫᴜᴀʟɪᴛʏ » {res}`\n\n**🔗ᴜʀʟ » ** `{url}`\n\n𝗕𝗢𝗧 𝗠𝗔𝗗𝗘 𝗕𝗬 ➤ 𝗔𝗗𝗜𝗧𝗬𝗔⚡️\n\n"
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
