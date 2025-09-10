@@ -154,7 +154,7 @@ async def start_command(bot: Client, message: Message):
 # Stop command handler
 @bot.on_message(filters.command("stop"))
 async def restart_handler(_, m: Message):
-    await m.reply_text("**𝗦𝘁𝗼𝗽𝗽𝗲𝗱**🚦", True)
+    await m.reply_text("<b>ꜱᴛᴏᴘᴘᴇᴅ</b>🚦", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 @bot.on_message(filters.command("restart"))
