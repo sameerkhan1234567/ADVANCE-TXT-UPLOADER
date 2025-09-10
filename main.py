@@ -462,7 +462,7 @@ async def upload(bot: Client, m: Message):
         os.remove(x)
         return
 
-    await editable.edit(f"`🔗 <b>ᴛᴏᴛᴀʟ ʟɪɴᴋꜱ ꜰᴏᴜɴᴅ ᴀʀᴇ</b> {len(links)}\n\n🖼️ ɪᴍᴀɢᴇꜱ : {img_count}\n  📄 ᴘᴅꜰꜱ : {pdf_count}\n📂 ᴢɪᴘꜱ : {zip_count}\n  🎞️ ᴠɪᴅᴇᴏꜱ : {video_count}\n\nꜱᴇɴᴅ ꜰʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ.`")
+    await editable.edit(f"`🔗 <b>ᴛᴏᴛᴀʟ ʟɪɴᴋꜱ ꜰᴏᴜɴᴅ ᴀʀᴇ</b> {len(links)}\n\n🖼️ ɪᴍᴀɢᴇꜱ : {img_count}\n📄 ᴘᴅꜰꜱ : {pdf_count}\n📂 ᴢɪᴘꜱ : {zip_count}\n🎞️ ᴠɪᴅᴇᴏꜱ : {video_count}\n\nꜱᴇɴᴅ ꜰʀᴏᴍ ᴡʜᴇʀᴇ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ.`")
     input0: Message = await bot.listen(editable.chat.id)
     raw_text = input0.text
     await input0.delete(True)
