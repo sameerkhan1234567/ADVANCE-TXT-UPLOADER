@@ -808,6 +808,7 @@ async def upload(bot: Client, m: Message):
                         time.sleep(e.x)
                         continue
                else:
+                    emoji_message = await show_random_emojis(message)
                     Show = (
                           f"**📥 Status:** `Downloading...`\n"
                           f"**📊 Progress:** `{count}/{len(links)}`\n"
