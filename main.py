@@ -556,13 +556,6 @@ async def upload(bot: Client, m: Message):
     else:
         count = int(raw_text)
 
-    success_count = len(links) - failed_count
-    success_count =0
-    if len(links) == 1:
-        failed_count = 1
-    else:
-        count = int(raw_text)
-
     try:
         for i in range(count - 1, len(links)):
             V = links[i][1].replace("file/d/","uc?export=download&id=").replace("www.youtube-nocookie.com/embed", "youtu.be").replace("?modestbranding=1", "").replace("/view?usp=sharing","") # .replace("mpd","m3u8")
@@ -817,7 +810,7 @@ async def upload(bot: Client, m: Message):
                 else:
                     emoji_message = await show_random_emojis(message)
                     Show = (
-                          f"**📥 Status:** `Downloading...`\n"
+                          f"**📥 Status:** `Downloading...`\n\n"
                           f"**📊 Progress:** `{count}/{len(links)}`\n"
                           f"━━━━━━━━━━━━━━━━━━\n"
                           f"📁 **{name}**\n"
@@ -844,24 +837,23 @@ async def upload(bot: Client, m: Message):
 
                 count += 1
                 failed_count += 1
-                success_count = len(links) - failed_count
                 continue
 
 
     except Exception as e:
         await m.reply_text(e)
     #await m.reply_text("**<b>✨ ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>**")
-    await m.reply_text(f"<b>📌 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> {b_name}\n\n"
+    await m.reply_text("<b>✨ ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>\n\n"
+                       f"<b>📌 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> {b_name}\n\n"
                        f"╭────────────────\n"
                        f"├ 🔗 ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
-                       f"├ 🟢 ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ : <code>{success_count}</code>\n"
                        f"├ ❌ ꜰᴀɪʟᴇᴅ : <code>{failed_count}</code>\n"
                        f"├ 🎞️ ᴠɪᴅᴇᴏꜱ : <code>{video_count}</code>\n"
                        f"├ 📄 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
                        f"├ 🖼️ ɪᴍᴀɢᴇꜱ : <code>{img_count}</code>\n"
                        f"├ 📂 ᴢɪᴘꜱ : <code>{zip_count}</code>\n"
-                       f"╰────────────────\n\n")
-    await m.reply_text(f">ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ {CR}</code></pre>")
+                       f"╰────────────────\n\n"
+                       f"<b>ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ :</b> {CR}")
 
 bot.run()
 # The main() function is not defined in your original script, so I've commented it out.
