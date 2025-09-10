@@ -553,6 +553,7 @@ async def upload(bot: Client, m: Message):
     failed_count =0
     if len(links) == 1:
         count = 1
+    success_count = len(links) - failed_count
     else:
         count = int(raw_text)
 
@@ -807,10 +808,19 @@ async def upload(bot: Client, m: Message):
                         await m.reply_text(str(e))
                         time.sleep(e.x)
                         continue
-                else:
-                    emoji_message = await show_random_emojis(message)
-                    remaining_links = len(links) - count
-                    Show = f"**🍁 𝗗𝗢𝗪𝗡𝗟𝗢𝗔𝗗𝗜𝗡𝗚 🍁**\n\n**📝ɴᴀᴍᴇ » ** `{name}\n\n🔗ᴛᴏᴛᴀʟ ᴜʀʟ » {len(links)}\n\n🗂️ɪɴᴅᴇ𝘅 » {str(count)}/{len(links)}\n\n🌐ʀᴇᴍᴀɪɴɪɴɢ ᴜʀʟ » {remaining_links}\n\n❄ǫᴜᴀʟɪᴛʏ » {res}`\n\n**🔗ᴜʀʟ » ** `{url}`\n\n𝗕𝗢𝗧 𝗠𝗔𝗗𝗘 𝗕𝗬 ➤ 𝗔𝗗𝗜𝗧𝗬𝗔⚡️\n\n"
+               else:
+                    Show = (
+                          f"**📥 Status:** `Downloading...`\n"
+                          f"**📊 Progress:** `{count}/{len(links)}`\n"
+                          f"━━━━━━━━━━━━━━━━━━\n"
+                          f"📁 **{name}**\n"
+                          f"├ Format: `{MR}`\n"
+                          f"├ Quality: `{raw_text2}`\n"
+                          f"├ URL: `Secured 🔐`\n"
+                          f"└ Thumb: `{input6.text}`\n"
+                          f"━━━━━━━━━━━━━━━━━━\n"
+                          f"ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ᴘɪᴋᴀᴄʜᴜ"
+                      )
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
                     filename = res_file
@@ -821,24 +831,27 @@ async def upload(bot: Client, m: Message):
                     time.sleep(1)
 
             except Exception as e:
-                await m.reply_text(f'‼️𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗶𝗻𝗴 𝗙𝗮𝗶𝗹𝗲𝗱‼️\n\n'
-                                   f'📝𝗡𝗮𝗺𝗲 » `{name}`\n\n'
-                                   f'🔗𝗨𝗿𝗹 » <a href="{url}">__**Click Here to See Link**__</a>`')
+                await m.reply_text(f'⚠️ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ғᴀɪʟᴇᴅ\n\n'
+                                   f'ɴᴀᴍᴇ » `{name}`\n\n'
+                                   f'ᴜʀʟ » <a href="{url}">__**Click Here to See Link**__</a>`')
 
                 count += 1
                 failed_count += 1
+                success_count = len(links) - failed_count
                 continue
 
 
     except Exception as e:
         await m.reply_text(e)
-    #await m.reply_text("**🥳𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆 𝗗𝗼𝗻𝗲🥳**")
-    await m.reply_text(f"`✨𝗕𝗔𝗧𝗖𝗛 𝗦𝗨𝗠𝗠𝗔𝗥𝗬✨\n\n"
-                       f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
-                       f"📛𝗜𝗻𝗱𝗲𝘅 𝗥𝗮𝗻𝗴𝗲 » ({raw_text} to {len(links)})\n"
-                       f"📚𝗕𝗮𝘁𝗰𝗵 𝗡𝗮𝗺𝗲 » {b_name}\n\n"
-                       f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
-                       f"✨𝗧𝗫𝗧 𝗦𝗨𝗠𝗠𝗔𝗥𝗬✨ : {len(links)}\n"
+    #await m.reply_text("**<b>✨ ᴘʀᴏᴄᴇꜱꜱ ᴄᴏᴍᴘʟᴇᴛᴇᴅ</b>**")
+    await m.reply_text(f"<b>📌 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> {b_name}\n\n"
+                       f"╭────────────────\n"
+                       f"├ 🔗 ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
+                       f"├ ❌ ꜰᴀɪʟᴇᴅ : <code>{failed_count}</code>\n"
+                       f"├ 🎞️ ᴠɪᴅᴇᴏꜱ : <code>{video_count}</code>\n"
+                       f"├ 📄 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
+                       f"├ 🖼️ ɪᴍᴀɢᴇꜱ : <code>{img_count}</code>\n"
+                       f"├ 📂 ᴢɪᴘꜱ : <code>{zip_count}</code>\n"
                        f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
                        f"🔹𝗩𝗶𝗱𝗲𝗼 » {video_count}\n🔹𝗣𝗱𝗳 » {pdf_count}\n🔹𝗜𝗺𝗴 » {img_count}\n🔹𝗭𝗶𝗽 » {zip_count}\n🔹𝗙𝗮𝗶𝗹𝗲𝗱 𝗨𝗿𝗹 » {failed_count}\n\n"
                        f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
