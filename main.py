@@ -558,8 +558,8 @@ async def upload(bot: Client, m: Message):
 
     success_count = len(links) - failed_count
     success_count =0
-    if len(links) ==1:
-        failed_count =1
+    if len(links) == 1:
+        failed_count = 1
     else:
         count = int(raw_text)
 
