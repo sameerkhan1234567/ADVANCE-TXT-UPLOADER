@@ -428,7 +428,7 @@ async def upload(bot: Client, m: Message):
         await m.reply_text("**🚫You are not authorized to use this bot.**")
         return
 
-    editable = await m.reply_text(f"📝<b>ꜱᴇɴᴅ ᴛxᴛ ꜰɪʟᴇ</b>)
+    editable = await m.reply_text(f"📝<b>ꜱᴇɴᴅ ᴛxᴛ ꜰɪʟᴇ</b>")
     input: Message = await bot.listen(editable.chat.id)
     x = await input.download()
     await input.delete(True)
