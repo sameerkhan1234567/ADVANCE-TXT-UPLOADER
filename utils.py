@@ -98,7 +98,7 @@ async def progress_bar(current, total, reply, start):
                     f"┃ ⚡ Speed  │ {sp}  ┃\n"
                     f"┃ 📊 Done   │ {perc} ┃\n"
                     f"┃ 💾 Loaded │ {cur} ┃\n"
-                    f"┃ 📦 Total  │ {tot} ┃\n"
+                    f"┃ 📚 Total  │ {tot} ┃\n"
                     f"┃ ⏱️ ETA    │ {eta} ┃\n"
                     f"┗━━━━━━━━━━━━━━━━━━━┛\n"
                     f"✨ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ ᴘɪᴋᴀᴄʜᴜ ✨"
