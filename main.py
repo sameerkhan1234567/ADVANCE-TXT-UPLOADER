@@ -847,17 +847,14 @@ async def upload(bot: Client, m: Message):
     await m.reply_text(f"<b>📌 ʙᴀᴛᴄʜ ɴᴀᴍᴇ :</b> {b_name}\n\n"
                        f"╭────────────────\n"
                        f"├ 🔗 ᴛᴏᴛᴀʟ ᴜʀʟꜱ : <code>{len(links)}</code>\n"
+                       f"├ 🟢 ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟ : <code>{success_count}</code>\n"
                        f"├ ❌ ꜰᴀɪʟᴇᴅ : <code>{failed_count}</code>\n"
                        f"├ 🎞️ ᴠɪᴅᴇᴏꜱ : <code>{video_count}</code>\n"
                        f"├ 📄 ᴘᴅꜰꜱ : <code>{pdf_count}</code>\n"
                        f"├ 🖼️ ɪᴍᴀɢᴇꜱ : <code>{img_count}</code>\n"
                        f"├ 📂 ᴢɪᴘꜱ : <code>{zip_count}</code>\n"
-                       f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
-                       f"🔹𝗩𝗶𝗱𝗲𝗼 » {video_count}\n🔹𝗣𝗱𝗳 » {pdf_count}\n🔹𝗜𝗺𝗴 » {img_count}\n🔹𝗭𝗶𝗽 » {zip_count}\n🔹𝗙𝗮𝗶𝗹𝗲𝗱 𝗨𝗿𝗹 » {failed_count}\n\n"
-                       f"▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n"
-                       f"✅𝗦𝗧𝗔𝗧𝗨𝗦 » 𝗖𝗢𝗠𝗣𝗟𝗘𝗧𝗘𝗗`")
-    await m.reply_text(f"<pre><code>📥𝗘𝘅𝘁𝗿𝗮𝗰𝘁𝗲𝗱 𝗕𝘆 ➤『{CR}』</code></pre>")
-    await m.reply_text(f"<pre><code>『😏𝗥𝗲𝗮𝗰𝘁𝗶𝗼𝗻 𝗞𝗼𝗻 𝗗𝗲𝗴𝗮😏』</code></pre>")
+                       f"╰────────────────\n\n")
+    await m.reply_text(f">ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ {CR}</code></pre>")
 
 bot.run()
 # The main() function is not defined in your original script, so I've commented it out.
