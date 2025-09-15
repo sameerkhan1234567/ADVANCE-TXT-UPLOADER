@@ -49,7 +49,7 @@ cookies_file_path = os.getenv("COOKIES_FILE_PATH", "youtube_cookies.txt")
 
 #pwimg = "https://graph.org/file/8add8d382169e326f67e0-3bf38f92e52955e977.jpg"
 #ytimg = "https://graph.org/file/3aa806c302ceec62e6264-60ced740281395f68f.jpg"
-cpimg = "https://graph.org/file/5ed50675df0faf833efef-e102210eb72c1d5a17.jpg"
+cpimg = "https://files.catbox.moe/v9z1n7.jpg"
 
 async def show_random_emojis(message):
     emojis = ['🎊', '🔮', '😎', '⚡️', '🚀', '✨', '💥', '🎉', '🥂', '🍾', '🦠', '🤖', '❤️‍🔥', '🕊️', '💃', '🥳','🐅','🦁']
@@ -57,7 +57,7 @@ async def show_random_emojis(message):
     return emoji_message
 
 # Define the owner's user ID
-OWNER_ID = 7325274090 # Replace with the actual owner's user ID
+OWNER_ID = 7062964338 # Replace with the actual owner's user ID
 
 # Initialize the database instance globally
 # This will attempt to connect to MongoDB when the bot starts
@@ -123,7 +123,7 @@ async def sudo_command(bot: Client, message: Message):
 keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🇮🇳ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ🇮🇳" ,url=f"https://t.me/Adiixcontactbot") ],
+                    InlineKeyboardButton("🇮🇳ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ🇮🇳" ,url=f"https://t.me/ItsPikachubot") ],
                     [
                     InlineKeyboardButton("🔔ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ🔔" ,url="https://t.me/Medicoarmy") ],
                     [
@@ -134,7 +134,7 @@ keyboard = InlineKeyboardMarkup(
 
 # Image URLs for the random image feature
 image_urls = [
-    "https://files.catbox.moe/k3qs5r.jpg",
+    "https://files.catbox.moe/v9z1n7.jpg",
     # Add more image URLs as needed
 ]
 random_image_url = random.choice(image_urls)
@@ -509,9 +509,9 @@ async def upload(bot: Client, m: Message):
     raw_text3 = input3.text
     await input3.delete(True)
     # Default credit message with link
-    credit = "️[️](https://t.me/Adiixcontactbot)"
+    credit = "️[️](https://t.me/ItsPikachubot)"
     if raw_text3 == '1':
-        CR = '[ᴘɪᴋᴀᴄʜᴜ️](https://t.me/Adiixcontactbot)'
+        CR = '[ᴘɪᴋᴀᴄʜᴜ️](https://t.me/ItsPikachubot)'
     elif raw_text3:
         try:
             text, link = raw_text3.split(',')
