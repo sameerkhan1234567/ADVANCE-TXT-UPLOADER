@@ -204,16 +204,11 @@ def save_to_file(video_links, channel_name):
 async def download_video(url, cmd, name):
     global failed_counter
 
-    aria2c_cmd = f'{cmd} -R 25 --fragment-retries 25 --external-downloader aria2c --downloader-args "aria2c: -x 16 -j 32"'
-    fallback_cmd = f'{cmd} -R 10 --fragment-retries 10'
+    # ✅ Force fastest possible yt-dlp command with multithreading
+    fast_cmd = f'{cmd} -R 25 --fragment-retries 25 -N 32 --concurrent-fragments 32'
 
-    for attempt in range(2):  # Try twice: first with aria2c, then without
-        logging.info(f"[Download Attempt {attempt + 1}] Running command: {aria2c_cmd if attempt == 0 else fallback_cmd}")
-        selected_cmd = aria2c_cmd if attempt == 0 else fallback_cmd
-        result = subprocess.run(selected_cmd, shell=True)
-        if result.returncode == 0:
-            break
-        await asyncio.sleep(2)
+    logging.info(f"[Download Attempt] Running command: {fast_cmd}")
+    result = subprocess.run(fast_cmd, shell=True)
 
     # Check for common file outputs
     for ext in ["", ".webm", ".mp4", ".mkv", ".mp4.webm"]:
@@ -222,7 +217,6 @@ async def download_video(url, cmd, name):
             return target_file
 
     return name
-
 
 async def send_doc(bot: Client, m: Message, cc, ka, cc1, prog, count, name):
     reply = await m.reply_text(f"<b>📤ᴜᴘʟᴏᴀᴅɪɴɢ📤 »</b> `{name}`\n\nʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ᴘɪᴋᴀᴄʜᴜ")
