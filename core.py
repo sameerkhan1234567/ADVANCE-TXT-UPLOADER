@@ -205,7 +205,7 @@ async def download_video(url, cmd, name):
     global failed_counter
 
     # ✅ Force fastest possible yt-dlp command with multithreading
-    fast_cmd = f'{cmd} -R 25 --fragment-retries 25 -N 32 --concurrent-fragments 32'
+    fast_cmd = f'{cmd} -R 15 --fragment-retries 15 -N 48 --concurrent-fragments 48'
 
     logging.info(f"[Download Attempt] Running command: {fast_cmd}")
     result = subprocess.run(fast_cmd, shell=True)
