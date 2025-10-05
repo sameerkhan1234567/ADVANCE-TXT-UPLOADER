@@ -101,7 +101,7 @@ async def progress_bar(current, total, reply, start):
                     f"┃ 📚 Total  │ {tot} ┃\n"
                     f"┃ ⏱️ ETA    │ {eta} ┃\n"
                     f"┗━━━━━━━━━━━━━━━━━━━┛\n"
-                    f"✨ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ ᴘɪᴋᴀᴄʜᴜ ✨"
+                    f"✨ 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 𝐂𝐀𝐏𝐓𝐀𝐈𝐍 𝐊𝐈𝐍𝐆 ✨"
                ) 
             except FloodWait as e:
                 time.sleep(e.x)
