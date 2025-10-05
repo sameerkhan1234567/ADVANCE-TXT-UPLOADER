@@ -57,7 +57,7 @@ async def show_random_emojis(message):
     return emoji_message
 
 # Define the owner's user ID
-OWNER_ID = 7062964338 # Replace with the actual owner's user ID
+OWNER_ID = 7968584207 # Replace with the actual owner's user ID
 
 # Initialize the database instance globally
 # This will attempt to connect to MongoDB when the bot starts
@@ -67,7 +67,7 @@ except Exception as e:
     logging.error(f"Failed to initialize database: {e}")
     sys.exit(1) # Exit if database connection fails
 
-AUTH_CHANNEL = -1002752608747
+AUTH_CHANNEL = -1003002165118
 
 # Function to check if a user is authorized
 def is_authorized(user_id: int) -> bool:
@@ -123,18 +123,18 @@ async def sudo_command(bot: Client, message: Message):
 keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🇮🇳ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ🇮🇳" ,url=f"https://t.me/ItsPikachubot") ],
+                    InlineKeyboardButton("🇮🇳ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ🇮🇳" ,url=f"https://t.me/KINGXCONTACTBOT") ],
                     [
-                    InlineKeyboardButton("🔔ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ🔔" ,url="https://t.me/Medicoarmy") ],
+                    InlineKeyboardButton("🔔ᴜᴘᴅᴀᴛᴇ ᴄʜᴀɴɴᴇʟ🔔" ,url="https://t.me/captain_king_09") ],
                     [
-                    InlineKeyboardButton("🦋ғᴏʟʟᴏᴡ ᴜs🦋" ,url="https://t.me/Medicoarmy")
+                    InlineKeyboardButton("🦋ғᴏʟʟᴏᴡ ᴜs🦋" ,url="https://t.me/captain_kingg_09")
                 ],
             ]
       )
 
 # Image URLs for the random image feature
 image_urls = [
-    "https://files.catbox.moe/v9z1n7.jpg",
+    "https://file-to-link-632f24ac9728.herokuapp.com/dl/68dc0b98b5d0a61eb2760753",
     # Add more image URLs as needed
 ]
 random_image_url = random.choice(image_urls)
@@ -297,7 +297,7 @@ async def edit_txt(client, message: Message):
         try:
             await message.reply_document(
                 document=final_file_path,
-                caption="📥**ᴇᴅɪᴛᴇᴅ ʙʏ ᴘɪᴋᴀᴄʜᴜ**"
+                caption="📥ᗴ᙭丅ᖇᗩᑕ丅 ᗷƳ ᑕᗩᑭ丅ᗩᎥᑎ ᛕᎥᑎǤ"
             )
         except Exception as e:
             await message.reply_text(f"🚨 **Error**: Unable to send the file.\n\nDetails: {e}")
@@ -385,7 +385,7 @@ async def ytplaylist_to_txt(client: Client, message: Message):
         file_name = save_to_file(videos, title)
         await message.reply_document(
             document=file_name,
-            caption=f"`{title}`\n\n<b>📥 ᴇxᴛʀᴀᴄᴛᴇᴅ ʙʏ : ᴘɪᴋᴀᴄʜᴜ</b>"
+            caption=f"`{title}`\n\n<b>📥 ᗴ᙭丅ᖇᗩᑕ丅 ᗷƳ ᑕᗩᑭ丅ᗩᎥᑎ ᛕᎥᑎǤ</b>"
         )
         os.remove(file_name)
     else:
@@ -408,7 +408,7 @@ async def list_users(client: Client, msg: Message):
 async def help_command(client: Client, msg: Message):
     help_text = (
         "`/start` - Start the bot⚡\n\n"
-        "`/txt` - Download and upload files (sudo)🎬\n\n"
+        "`/sameer` - Download and upload files (sudo)🎬\n\n"
         "`/restart` - Restart the bot🔮\n\n"
         "`/stop` - Stop ongoing process🛑\n\n"
         "`/cookies` - Upload cookies file🍪\n\n"
@@ -422,7 +422,7 @@ async def help_command(client: Client, msg: Message):
     await msg.reply_text(help_text)
 
 # Upload command handler
-@bot.on_message(filters.command(["txt"]))
+@bot.on_message(filters.command(["sameer"]))
 async def upload(bot: Client, m: Message):
     if not is_authorized(m.chat.id): # Use m.chat.id for channel/group, m.from_user.id for private
         await m.reply_text("**🚫You are not authorized to use this bot.**")
@@ -509,9 +509,9 @@ async def upload(bot: Client, m: Message):
     raw_text3 = input3.text
     await input3.delete(True)
     # Default credit message with link
-    credit = "️[️](https://t.me/ItsPikachubot)"
+    credit = "️[️](https://t.me/KINGXCONTACTBOT)"
     if raw_text3 == '1':
-        CR = '[ᴘɪᴋᴀᴄʜᴜ️](https://t.me/ItsPikachubot)'
+        CR = '[CАPTАЇЙ КЇЙG️](https://t.me/KINGXCONTACTBOT)'
     elif raw_text3:
         try:
             text, link = raw_text3.split(',')
@@ -537,7 +537,7 @@ async def upload(bot: Client, m: Message):
 
 
 
-    await editable.edit("<b>ɴᴏᴡ ꜱᴇɴᴅ ᴛʜᴇ ᴛʜᴜᴍʙ ᴜʀʟ ᴇɢ »</b> https://graph.org/file/13a89d77002442255efad-989ac290c1b3f13b44.jpg\n\n<b>ᴏʀ ɪꜰ ᴅᴏɴ'ᴛ ᴡᴀɴᴛ ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇɴᴅ = ɴᴏ</b>")
+    await editable.edit("<b>ɴᴏᴡ ꜱᴇɴᴅ ᴛʜᴇ ᴛʜᴜᴍʙ ᴜʀʟ ᴇɢ »</b> https://graph.org/file/b2d51adb5bb544ebeaae8-2863c042b22a9a362b.jpg\n\n<b>ᴏʀ ɪꜰ ᴅᴏɴ'ᴛ ᴡᴀɴᴛ ᴛʜᴜᴍʙɴᴀɪʟ ꜱᴇɴᴅ = ɴᴏ</b>")
     input6 = message = await bot.listen(editable.chat.id)
     raw_text6 = input6.text
     await input6.delete(True)
@@ -819,7 +819,7 @@ async def upload(bot: Client, m: Message):
                           f"├ URL: `Secured 🔐`\n"
                           f"└ Thumb: `{input6.text}`\n"
                           f"━━━━━━━━━━━━━━━━━━\n"
-                          f"ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ ᴘɪᴋᴀᴄʜᴜ"
+                          f"B̶O̶T̶ ̶M̶A̶D̶E̶ ̶B̶Y̶ ̶C̶A̶P̶T̶A̶I̶N̶ ̶K̶I̶N̶G̶"
                       )
                     prog = await m.reply_text(Show)
                     res_file = await helper.download_video(url, cmd, name)
